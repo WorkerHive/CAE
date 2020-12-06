@@ -23,7 +23,7 @@ int main(){
   Handle(TDocStd_Document) xdeDoc;
 
   STEPCAFControl_Reader aReader;
-  if(!aReader.ReadFile("GA.stp") != IFSelect_RetDone){ 
+  if(!(aReader.ReadFile("GA.stp") == IFSelect_RetDone)){ 
     printf("Error reading step file\n");
     return 1;
     /*parse error*/ }
