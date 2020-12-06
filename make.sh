@@ -6,4 +6,5 @@ clang++ -stdlib=libstdc++ -std=c++11 \
         -L /usr/local/lib \
         -L /lib64 \
         -l TKSTEP -l TKernel -l TKXSBase -l TKLCAF -l TKXCAF -l TKBRep -l TKRWMesh \
+        -l TKMath -l TKService -l TKXDESTEP \
         step_to_gltf.cxx -o step_to_gltf

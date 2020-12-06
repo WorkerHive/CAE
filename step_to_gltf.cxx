@@ -18,11 +18,22 @@
 
 int main(){
 
+  printf("Starting STEP processor\n");
+
   Handle(TDocStd_Document) xdeDoc;
 
   STEPCAFControl_Reader aReader;
-  if(!(aReader.ReadFile("./GA.stp") != IFSelect_RetDone)){ /*parse error*/ }
-  if(!aReader.Transfer(xdeDoc)) { /*translation error*/ }
+  if(!(aReader.ReadFile("./GA.stp") != IFSelect_RetDone)){ 
+    printf("Error reading step file\n");
+    return;
+    /*parse error*/ }
+  printf("Read step file\n");
+  if(!aReader.Transfer(xdeDoc)) { 
+    printf("Error transfering step file\n");
+    /*translation error*/ 
+  return;}
+  printf("Trasnfered step file\n");
+
   
   Handle(XCAFDoc_ShapeTool) aShapeTool = XCAFDoc_DocumentTool::ShapeTool(xdeDoc->Main());
 
@@ -32,6 +43,8 @@ int main(){
   TopoDS_Compound aCompound;
   BRep_Builder aBuildTool;
   aBuildTool.MakeCompound(aCompound);
+
+  printf("Ready to make shape\n");
 
   for (TDF_LabelSequence::Iterator aRootIter (aRootLabels); aRootIter.More(); aRootIter.Next()){
     const TDF_Label& aRootLabel = aRootIter.Value();
@@ -43,8 +56,9 @@ int main(){
 
 //  Handle(Prs3d_Drawer) aDrawer = new Prs3d_Drawer();
   
+  printf("Shape ready, starting export\n");
   TColStd_IndexedDataMapOfStringString aMetadata;
-  RWGltf_CafWriter aGltfWriter("exported.glb", true);
+  RWGltf_CafWriter aGltfWriter("./exported.glb", true);
   aGltfWriter.ChangeCoordinateSystemConverter().SetInputLengthUnit(0.001);
   aGltfWriter.ChangeCoordinateSystemConverter().SetInputCoordinateSystem(RWMesh_CoordinateSystem_Zup);
   if(!aGltfWriter.Perform(xdeDoc, aMetadata, Message_ProgressRange())) {
