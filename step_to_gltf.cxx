@@ -23,7 +23,7 @@ int main(){
   Handle(TDocStd_Document) xdeDoc;
 
   STEPCAFControl_Reader aReader;
-  if(!(aReader.ReadFile("./GA.stp") != IFSelect_RetDone)){ 
+  if(!(aReader.ReadFile("GA.stp") != IFSelect_RetDone)){ 
     printf("Error reading step file\n");
     return 1;
     /*parse error*/ }
@@ -58,7 +58,7 @@ int main(){
   
   printf("Shape ready, starting export\n");
   TColStd_IndexedDataMapOfStringString aMetadata;
-  RWGltf_CafWriter aGltfWriter("./exported.glb", true);
+  RWGltf_CafWriter aGltfWriter("exported.glb", true);
   aGltfWriter.ChangeCoordinateSystemConverter().SetInputLengthUnit(0.001);
   aGltfWriter.ChangeCoordinateSystemConverter().SetInputCoordinateSystem(RWMesh_CoordinateSystem_Zup);
   if(!aGltfWriter.Perform(xdeDoc, aMetadata, Message_ProgressRange())) {
