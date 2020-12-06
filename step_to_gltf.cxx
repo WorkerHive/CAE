@@ -14,7 +14,7 @@
 #include <RWGltf_CafWriter.hxx>
 #include <Message_ProgressIndicator.hxx>
 #include <Prs3d_Drawer.hxx>
-#include <BRepMesh_IncrementalMesh>
+#include <BRepMesh_IncrementalMesh.hxx>
 
 int main(){
 
