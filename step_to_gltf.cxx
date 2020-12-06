@@ -20,7 +20,7 @@ int main(){
 
   printf("Starting STEP processor\n");
 
-  Handle(TDocStd_Document) xdeDoc = new TDocStd_Document();
+  Handle(TDocStd_Document) xdeDoc = new TDocStd_Document("process");
 
   STEPCAFControl_Reader aReader;
   if(!(aReader.ReadFile("GA.stp") == IFSelect_RetDone)){ 
