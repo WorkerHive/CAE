@@ -46,8 +46,8 @@ int main(){
   RWGltf_CafWriter aGltfWriter("exported.glb", true);
   aGltfWriter.ChangeCoordinateSystemConverter().SetInputLengthUnit(0.001);
   aGltfWriter.ChangeCoordinateSystemConverter().SetInputCoordinateSystem(RWMesh_CoordinateSystem_Zup);
-  if(!aGltfWriter.Perform(xdeDoc, aMetadata, null)) {
-    printf("Export error\n")
+  if(!aGltfWriter.Perform(xdeDoc, aMetadata, NULL)) {
+    printf("Export error\n");
   }
   return 0;
 }
