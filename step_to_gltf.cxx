@@ -20,7 +20,7 @@ int main(){
   Handle(TDocStd_Document) xdeDoc;
 
   STEPCAFControl_Reader aReader;
-  if(!aReader.ReadFile("./GA.stp")) != IFSelect_RetDone){ /*parse error*/ }
+  if(!aReader.ReadFile("./GA.stp") != IFSelect_RetDone){ /*parse error*/ }
   if(!aReader.Transfer(xdeDoc)) { /*translation error*/ }
   
   Handle(XCAFDoc_ShapeTool) aShapeTool = XCAFDoc_DocumentTool::ShapeTool(xdeDoc->Main());
