@@ -12,6 +12,7 @@
 #include <TCollection_AsciiString.hxx>
 #include <NCollection_IndexedDataMap.hxx>
 #include <RWGltf_CafWriter.hxx>
+#include <Message_ProgressIndicator.hxx>
 
 
 
@@ -46,7 +47,7 @@ int main(){
   RWGltf_CafWriter aGltfWriter("exported.glb", true);
   aGltfWriter.ChangeCoordinateSystemConverter().SetInputLengthUnit(0.001);
   aGltfWriter.ChangeCoordinateSystemConverter().SetInputCoordinateSystem(RWMesh_CoordinateSystem_Zup);
-  if(!aGltfWriter.Perform(xdeDoc, aMetadata, NULL)) {
+  if(!aGltfWriter.Perform(xdeDoc, aMetadata, Handle(Message_ProgressIndicator)())) {
     printf("Export error\n");
   }
   return 0;
