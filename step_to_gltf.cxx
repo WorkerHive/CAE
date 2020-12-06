@@ -14,6 +14,7 @@
 #include <RWGltf_CafWriter.hxx>
 #include <Message_ProgressIndicator.hxx>
 #include <Prs3d_Drawer.hxx>
+#include <Prs3d.hxx>
 #include <BRepMesh_IncrementalMesh.hxx>
 
 int main(){
@@ -60,7 +61,7 @@ int main(){
   anAlgo.ChangeParameters().Deflection = Prs3d::GetDeflection (aCompound, aDrawer);
   anAlgo.ChangeParameters().Angle = 20.0 * M_PI / 180.0;
   anAlgo.ChangeParameters().InParallel = true;
-  anAlgo.SetShape(aCompound)
+  anAlgo.SetShape(aCompound);
   anAlgo.Perform();  
 
   printf("Shape ready, starting export\n");
