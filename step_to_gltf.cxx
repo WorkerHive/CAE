@@ -16,6 +16,8 @@
 #include <Prs3d_Drawer.hxx>
 #include <Prs3d.hxx>
 #include <BRepMesh_IncrementalMesh.hxx>
+#include <BRepBndLib.hxx>
+#include <Bnd_Box.hxx>
 
 int main(){
 
@@ -58,7 +60,11 @@ int main(){
   printf("Meshing\n");
   Handle(Prs3d_Drawer) aDrawer = new Prs3d_Drawer();
   BRepMesh_IncrementalMesh anAlgo;
-//  anAlgo.ChangeParameters().Deflection = Prs3d::GetDeflection(aCompound, aDrawer->DeviationCoefficient(), aDrawer->MaximalChordialDeviation());
+
+  Bnd_Box B;
+  
+  BRepBndLib::Add(aCompound, B);
+  anAlgo.ChangeParameters().Deflection = Prs3d::GetDeflection(B, aDrawer->DeviationCoefficient(), aDrawer->MaximalChordialDeviation());
   anAlgo.ChangeParameters().Angle = 20.0 * M_PI / 180.0;
   anAlgo.ChangeParameters().InParallel = true;
   anAlgo.SetShape(aCompound);
@@ -66,7 +72,7 @@ int main(){
 
   printf("Shape ready, starting export\n");
   TColStd_IndexedDataMapOfStringString aMetadata;
-  RWGltf_CafWriter aGltfWriter("exported.glb", true);
+  RWGltf_CafWriter aGltfWriter("exported.gltf", false);
   aGltfWriter.ChangeCoordinateSystemConverter().SetInputLengthUnit(0.001);
   aGltfWriter.ChangeCoordinateSystemConverter().SetInputCoordinateSystem(RWMesh_CoordinateSystem_Zup);
   if(!aGltfWriter.Perform(xdeDoc, aMetadata, Message_ProgressRange())) {
