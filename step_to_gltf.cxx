@@ -58,7 +58,7 @@ int main(){
   printf("Meshing\n");
   Handle(Prs3d_Drawer) aDrawer = new Prs3d_Drawer();
   BRepMesh_IncrementalMesh anAlgo;
-  anAlgo.ChangeParameters().Deflection = Prs3d::GetDeflection(aCompound, aDrawer->DeviantCoefficient(), aDrawer->MaximalChordialDeviation());
+  anAlgo.ChangeParameters().Deflection = Prs3d::GetDeflection(aCompound, aDrawer->DeviationCoefficient(), aDrawer->MaximalChordialDeviation());
   anAlgo.ChangeParameters().Angle = 20.0 * M_PI / 180.0;
   anAlgo.ChangeParameters().InParallel = true;
   anAlgo.SetShape(aCompound);
