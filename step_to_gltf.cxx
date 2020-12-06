@@ -20,8 +20,8 @@ int main(){
   Handle(TDocStd_Document) xdeDoc;
 
   STEPCAFControl_Reader aReader;
-  if(!aReader.ReadFile("./GA.stp") != IFSelect_RetDone){ /*parse error*/ }
-  if(!aReader.Transfer(xdeDoc) { /*translation error*/ }
+  if(!aReader.ReadFile("./GA.stp")) != IFSelect_RetDone){ /*parse error*/ }
+  if(!aReader.Transfer(xdeDoc)) { /*translation error*/ }
   
   Handle(XCAFDoc_ShapeTool) aShapeTool = XCAFDoc_DocumentTool::ShapeTool(xdeDoc->Main());
 
@@ -43,7 +43,7 @@ int main(){
 //  Handle(Prs3d_Drawer) aDrawer = new Prs3d_Drawer();
   
   TColStd_IndexedDataMapOfStringString aMetadata;
-  RWGltf_CafWriter aGltfWriter("exported.glb", true)
+  RWGltf_CafWriter aGltfWriter("exported.glb", true);
   aGltfWriter.ChangeCoordinateSystemConverter().SetInputLengthUnit(0.001);
   aGltfWriter.ChangeCoordinateSystemConverter().SetInputCoordinateSystem(RWMesh_CoordinateSystem_Zup);
   if(!aGltfWriter.Perform(xdeDoc, aMetadata, Handle(Message_ProgressIndicator)()) {
