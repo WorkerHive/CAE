@@ -13,8 +13,8 @@
 #include <NCollection_IndexedDataMap.hxx>
 #include <RWGltf_CafWriter.hxx>
 #include <Message_ProgressIndicator.hxx>
-
-
+#include <Prs3d_Drawer.hxx>
+#include <BRepMesh_IncrementalMesh>
 
 int main(){
 
@@ -45,7 +45,7 @@ int main(){
   aBuildTool.MakeCompound(aCompound);
 
   printf("Ready to make shape\n");
-
+  
   for (TDF_LabelSequence::Iterator aRootIter (aRootLabels); aRootIter.More(); aRootIter.Next()){
     const TDF_Label& aRootLabel = aRootIter.Value();
     TopoDS_Shape aRootShape;
@@ -53,9 +53,16 @@ int main(){
       aBuildTool.Add(aCompound, aRootShape);
     }
   }
-
-//  Handle(Prs3d_Drawer) aDrawer = new Prs3d_Drawer();
   
+  printf("Meshing\n");
+  Handle(Prs3d_Drawer) aDrawer = new Prs3d_Drawer();
+  BRepMesh_IncrementalMesh anAlgo;
+  anAlgo.ChangeParameters().Deflection = Prs3d::GetDeflection (aCompound, aDrawer);
+  anAlgo.ChangeParameters().Angle = 20.0 * M_PI / 180.0;
+  anAlgo.ChangeParameters().InParallel = true;
+  anAlgo.SetShape(aCompound)
+  anAlgo.Perform();  
+
   printf("Shape ready, starting export\n");
   TColStd_IndexedDataMapOfStringString aMetadata;
   RWGltf_CafWriter aGltfWriter("exported.glb", true);
