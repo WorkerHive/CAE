@@ -25,13 +25,13 @@ int main(){
   STEPCAFControl_Reader aReader;
   if(!(aReader.ReadFile("./GA.stp") != IFSelect_RetDone)){ 
     printf("Error reading step file\n");
-    return;
+    return 1;
     /*parse error*/ }
   printf("Read step file\n");
   if(!aReader.Transfer(xdeDoc)) { 
     printf("Error transfering step file\n");
     /*translation error*/ 
-  return;}
+  return 1;}
   printf("Trasnfered step file\n");
 
   
