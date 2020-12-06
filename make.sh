@@ -5,5 +5,6 @@ clang++ -stdlib=libstdc++ -std=c++11 \
         -I/usr/local/include/opencascade \
         -L /usr/local/lib \
         -L /lib64 \
-        -l TKSTEP -l TKernel -l TKXSBase \
+        -l TKSTEP -l TKernel -l TKXSBase -l TKLCAF -l TKXCAF -l TKBrep -l
+        TKRWMesh \
         step_to_gltf.cxx -o step_to_gltf
