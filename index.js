@@ -26,6 +26,7 @@ app.route('/process')
 }
 
 amqplib.connect('amqp://localhost', (err, conn) => {
+  console.log(err, conn)
   publisher(conn)
 })
 
