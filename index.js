@@ -1,6 +1,8 @@
 var express = require('express')
 var app = express()
+const multer = require('multer')
 var upload = multer({ dest: '/home/ubuntu/efs/inputs/' })
+
 const amqplib = require('amqplib/callback_api')
 
 const q = 'stp2glb';
