@@ -44,6 +44,7 @@ function publisher(conn, db){
       .post(upload.single('stp'), (req, res) => {
         let model = {
           id: uuid.v4(),
+          name: req.file.originalname,
           fileId: req.file.filename,
           createdAt: new Date().getTime(),
           status: "PREPROCESS"
