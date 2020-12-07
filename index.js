@@ -4,7 +4,7 @@ const uuid = require('uuid')
 const cors = require('cors')
 const multer = require('multer')
 var upload = multer({ dest: '/home/ubuntu/efs/inputs/' })
-var { MongoClient } = require('mongodb');
+var { ObjectId, MongoClient } = require('mongodb');
 
 app.use(cors())
 
@@ -27,7 +27,7 @@ function publisher(conn, db){
     
     app.route('/gallery/:id')
       .get((req, res) => {
-        db.collection('models').findOne({_id: req.params.id}, (err, model) => {
+        db.collection('models').findOne({_id: ObjectId(req.params.id)}, (err, model) => {
           if(!err && model){
             if(model.status == "PACKED"){
               res.sendFile('/home/ubuntu/efs/gltfpacked/' + model.fileId + '.glb')
