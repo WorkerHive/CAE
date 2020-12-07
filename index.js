@@ -17,10 +17,9 @@ function publisher(conn){
 
 app.route('/process')
       .post(upload.single('stp'), (req, res) => {
-        console.log(req.file)
-     ch.sendToQueue(q, Buffer.from(req.file.filename))
-  })
-
+        ch.sendToQueue(q, Buffer.from(req.file.filename))
+        res.send({success: true})
+      })
 
   }
 }
