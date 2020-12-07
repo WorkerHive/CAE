@@ -9,7 +9,7 @@ var createScene = function(){
   var scene = new BABYLON.Scene(engine);
   scene.createDefaultEnvironment();
     // Create a FreeCamera, and set its position to {x: 0, y: 5, z: -10}
-    var camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5, -10), scene);
+    var camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5, 6), scene);
     // Target the camera to scene origin
     camera.setTarget(BABYLON.Vector3.Zero());
     // Attach the camera to the canvas
@@ -17,7 +17,9 @@ var createScene = function(){
 
 
   BABYLON.SceneLoader.LoadAssetContainer("https://mail.rainbowkereru.com/gallery/", window.location.search.substring(1, window.location.search.length)+".glb", scene, (e) => {
-      e.meshes[0].position.y = 0;
+    e.meshes[0].position.y = 0;
+    e.meshes[0].position.x = 1;
+    //    e.meshes[0].rotation = new BABYLON.Vector3(0, 0 * Math.PI / 180, 0)
       e.addAllToScene();
     }, null, null, null, ".glb")
 
