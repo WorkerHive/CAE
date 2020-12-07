@@ -1,9 +1,12 @@
 var express = require('express')
 var app = express()
 const uuid = require('uuid')
+const cors = require('cors')
 const multer = require('multer')
 var upload = multer({ dest: '/home/ubuntu/efs/inputs/' })
 var { MongoClient } = require('mongodb');
+
+app.use(cors())
 
 const amqplib = require('amqplib/callback_api')
 
