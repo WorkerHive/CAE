@@ -30,7 +30,7 @@ function publisher(conn, db){
         db.collection('models').findOne({_id: ObjectId(req.params.id)}, (err, model) => {
           if(!err && model){
             if(model.status == "PACKED"){
-              res.sendFile('/home/ubuntu/efs/gltfpacked/' + model.fileId + '.glb')
+              res.sendFile('/home/ubuntu/efs/gltfpack/' + model.fileId + '.glb')
             }else{
               res.send({msg: "Not packed yet"})
             }
