@@ -46,4 +46,15 @@ MongoClient.connect('mongodb://localhost', (err, conn) => {
   })
 })
 
-app.listen(80)
+require("greenlock-express")
+    .init({
+        packageRoot: __dirname,
+        configDir: "./greenlock.d",
+        // contact for security and critical bug notices
+        maintainerEmail: "professional.balbatross@gmail.com",
+        // whether or not to run at cloudscale
+        cluster: false
+    })
+    // Serves on 80 and 443
+    // Get's SSL certificates magically!
+    .serve(app);
