@@ -52,10 +52,10 @@ function publisher(conn, db){
           status: "PREPROCESS"
         }
 
-        db.collection('models').insertOne(model, (err) => {
+        db.collection('models').insertOne(model, (err, r) => {
           if(!err){
             ch.sendToQueue(q, Buffer.from(req.file.filename))
-            res.send({success: true, id: model.id})
+            res.send({success: true, id: r.insertedId})
           }else{
             res.send({error: err})
           }
