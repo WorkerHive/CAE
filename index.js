@@ -27,7 +27,7 @@ function publisher(conn, db){
     
     app.route('/gallery/:id')
       .get((req, res) => {
-        db.collection('models').findOne({_id: ObjectId(req.params.id)}, (err, model) => {
+        db.collection('models').findOne({_id: ObjectId(req.params.id.split('.glb')[0])}, (err, model) => {
           if(!err && model){
             if(model.status == "PACKED"){
               res.sendFile('/home/ubuntu/efs/gltfpack/' + model.fileId + '.glb')
