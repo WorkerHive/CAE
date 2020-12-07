@@ -18,6 +18,27 @@ function publisher(conn, db){
     if(err != null) console.error(err)
     ch.assertQueue(q)
 
+    app.route('/gallery')
+      .get((req, res) => {
+        db.collection('models').find({}).toArray((err, models) => {
+          res.send((err) ? {error : err} : models)
+        })
+      })
+    
+    app.route('/gallery/:id')
+      .get((req, res) => {
+        db.collection('models').findOne({_id: req.params.id}, (err, model) => {
+          if(!err && model){
+            if(model.status == "PACKED"){
+              res.sendFile('/home/ubuntu/efs/gltfpacked/' + model.fileId + '.glb')
+            }else{
+              res.send({msg: "Not packed yet"})
+            }
+          }else{
+            res.send({error: "No model found"})
+          }
+        })
+      })
     
     app.route('/process')
       .post(upload.single('stp'), (req, res) => {
