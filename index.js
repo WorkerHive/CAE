@@ -8,6 +8,8 @@ var { ObjectId, MongoClient } = require('mongodb');
 
 app.use(cors())
 
+app.use('/viewer', express.static(__dirname + '/viewer'))
+
 const amqplib = require('amqplib/callback_api')
 
 const q = 'stp2glb';
